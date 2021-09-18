@@ -14,7 +14,8 @@ class BooksApp extends React.Component {
     wantToRead: [],
     read: [],
 
-    query:''
+    query:'',
+    searchedBooks:[]
 
   };
 
@@ -43,23 +44,33 @@ class BooksApp extends React.Component {
     })
   }
 
-
-  handleUpdateQuery=(query)=>{
-    this.setState(
-      {query:query}
-    )
+  handleUpdateQuery=async (query)=>{
+    this.setState({query:query})
+    if(query.trim()){
+      const searchResult = await search(query);
+      if(searchResult.error){
+        this.setState({searchedBooks:[]})
+      }else{
+        this.setState({searchedBooks:searchResult})
+      }
+    }else{
+      this.setState({searchedBooks:[]})
+    }
   }
 
 
   render() {
-    console.log("Query",this.state.query);
+    console.log("shelf books",this.state.books)
+    // console.log("Query",this.state.query);
+    console.log("searchedBooks",this.state.searchedBooks);
     return (
       <div className="app">
         <Switch>
           <Route path="/search" exact render={()=> <Search 
                                               onUpdateQuery ={this.state.query}
-                                              onChange = {this.handleUpdateQuery}
-                                              
+                                              handleUpdateQuery = {this.handleUpdateQuery}
+                                              onSearchedBooks = {this.state.searchedBooks}
+                                              handleChange={this.handleChange}
                                               />}/>
           <Route path="/" render={()=> <Home 
                                         currentlyReading={this.state.currentlyReading} 

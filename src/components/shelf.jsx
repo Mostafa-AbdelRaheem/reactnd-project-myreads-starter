@@ -3,7 +3,6 @@ import Book from "./book";
 
 class Shelf extends React.Component {
   render() {
-    // console.log("props", this.props);
     return (
       <div>
         <div className="bookshelf">

@@ -3,7 +3,6 @@ import React from "react";
 
 class Book extends React.Component {
   render() {
-    console.log("cuurentshelf", this.props.book);
     return (
       <div>
         <div className="book">
@@ -13,7 +12,11 @@ class Book extends React.Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url("${this.props.book.imageLinks.thumbnail}")`,
+                backgroundImage: `url("${
+                  this.props.book.imageLinks
+                    ? this.props.book.imageLinks.thumbnail
+                    : ""
+                }")`,
               }}
             ></div>
             <div className="book-shelf-changer">
@@ -34,7 +37,11 @@ class Book extends React.Component {
             </div>
           </div>
           <div className="book-title">{this.props.book.title}</div>
-          <div className="book-authors">{this.props.book.authors}</div>
+          <div className="book-authors">
+            {this.props.book.authors
+              ? this.props.book.authors
+              : "Auther in unknown"}
+          </div>
         </div>
       </div>
     );
