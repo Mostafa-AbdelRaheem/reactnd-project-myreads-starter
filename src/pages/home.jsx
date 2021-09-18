@@ -1,8 +1,6 @@
-// import { directive } from "@babel/types";
 import Shelf from "../components/shelf";
 import React from "react";
 import { Link } from "react-router-dom";
-// import { element } from "prop-types";
 
 class Home extends React.Component {
   render() {

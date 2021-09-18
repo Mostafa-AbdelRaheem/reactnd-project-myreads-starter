@@ -3,22 +3,21 @@ import * as BooksAPI from './BooksAPI'
 import Home from './pages/home';
 import Search from './pages/search';
 import { Route, Switch } from 'react-router-dom';
-import { getAll, update ,search} from './BooksAPI';
+import { update ,search} from './BooksAPI';
 import './App.css'
 
 class BooksApp extends React.Component {
-
   state = {
+    // status for Home page
     books: [],
     currentlyReading: [],
     wantToRead: [],
     read: [],
-
+    // status for search page
     query:'',
     searchedBooks:[]
 
   };
-
 
   componentDidMount() {
     BooksAPI.getAll().then(books=>{
@@ -29,7 +28,6 @@ class BooksApp extends React.Component {
         read: books.filter((book) => book.shelf === "read"),
       })
     })
-    
   }
 
   handleChange = (book,shelf) =>{
@@ -60,9 +58,6 @@ class BooksApp extends React.Component {
 
 
   render() {
-    console.log("shelf books",this.state.books)
-    // console.log("Query",this.state.query);
-    console.log("searchedBooks",this.state.searchedBooks);
     return (
       <div className="app">
         <Switch>

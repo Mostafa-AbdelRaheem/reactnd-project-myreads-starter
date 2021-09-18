@@ -1,5 +1,4 @@
 import React from "react";
-// import Select from "./select";
 
 class Book extends React.Component {
   render() {
