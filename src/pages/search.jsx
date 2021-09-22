@@ -4,6 +4,7 @@ import Book from "../components/book";
 
 class Search extends React.Component {
   render() {
+    const myBooks = this.props.onMyBooks.map((myBook) => myBook.id);
     return (
       <div>
         <div className="search-books">
@@ -27,14 +28,26 @@ class Search extends React.Component {
           <div className="search-books-results">
             <ol className="books-grid">
               {this.props.onSearchedBooks.length > 0 &&
-                this.props.onSearchedBooks.map((searchedBook) => (
-                  <li key={searchedBook.id}>
-                    <Book
-                      book={searchedBook}
-                      handleChange={this.props.handleChange}
-                    />
-                  </li>
-                ))}
+                this.props.onSearchedBooks.map((searchedBook) => {
+                  if (myBooks.includes(searchedBook.id)) {
+                    this.props.onMyBooks.forEach((element) => {
+                      if (searchedBook.id === element.id) {
+                        searchedBook.shelf = element.shelf;
+                      }
+                    });
+                  } else {
+                    searchedBook.shelf = "none";
+                  }
+
+                  return (
+                    <li key={searchedBook.id}>
+                      <Book
+                        book={searchedBook}
+                        handleChange={this.props.handleChange}
+                      />
+                    </li>
+                  );
+                })}
             </ol>
           </div>
         </div>

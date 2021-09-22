@@ -31,15 +31,16 @@ class BooksApp extends React.Component {
   }
 
   handleChange = (book,shelf) =>{
-    update(book,shelf);
-    BooksAPI.getAll().then(books=>{
-      this.setState({
-        books: books,
-        currentlyReading: books.filter((book) => book.shelf === "currentlyReading"),
-        wantToRead: books.filter((book) => book.shelf === "wantToRead"),
-        read: books.filter((book) => book.shelf === "read"),
+    update(book,shelf).then(
+      BooksAPI.getAll().then(books=>{
+        this.setState({
+          books: books,
+          currentlyReading: books.filter((book) => book.shelf === "currentlyReading"),
+          wantToRead: books.filter((book) => book.shelf === "wantToRead"),
+          read: books.filter((book) => book.shelf === "read"),
+        })
       })
-    })
+    )
   }
 
   handleUpdateQuery=async (query)=>{
@@ -66,6 +67,7 @@ class BooksApp extends React.Component {
                                               handleUpdateQuery = {this.handleUpdateQuery}
                                               onSearchedBooks = {this.state.searchedBooks}
                                               handleChange={this.handleChange}
+                                              onMyBooks={this.state.books}
                                               />}/>
           <Route path="/" render={()=> <Home 
                                         currentlyReading={this.state.currentlyReading} 

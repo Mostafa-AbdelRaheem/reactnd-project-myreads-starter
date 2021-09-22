@@ -39,7 +39,7 @@ class Book extends React.Component {
           <div className="book-authors">
             {this.props.book.authors
               ? this.props.book.authors
-              : "Auther in unknown"}
+              : "Auther is unknown"}
           </div>
         </div>
       </div>
