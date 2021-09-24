@@ -31,7 +31,7 @@ class BooksApp extends React.Component {
   }
 
   handleChange = (book,shelf) =>{
-    BooksAPI.update(book,shelf).then(
+    BooksAPI.update(book,shelf).then(()=>{
       BooksAPI.getAll().then(books=>{
         this.setState({
           books: books,
@@ -40,6 +40,8 @@ class BooksApp extends React.Component {
           read: books.filter((book) => book.shelf === "read"),
         })
       })
+    }
+      
     )
   }
 
